@@ -7,6 +7,8 @@ import OTPScreen from './OTPScreen';
 const Auth = ({navigation}) => {
     const defaultphn = '+919827352522'
     const [phno, onChangePhno] = useState('');
+    const [err, setErr] = useState('')
+    console.reportErrorsAsExceptions = false;
     return(
         <View style = {{flex:1,padding:10, justifyContent:'flex-end'}}>
             <View style = {{flex:3, justifyContent:'center'}}>
@@ -18,6 +20,7 @@ const Auth = ({navigation}) => {
             <View style = {{flex:2}}>
             <Text style = {{marginVertical : 4, fontWeight : 'bold', color:'black'}}>Phone Number</Text>
             <TextInput
+            keyboardType="phone-pad"
             style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginVertical : 8}}
             onChangeText={text => onChangePhno(text)}
             value={phno}
@@ -28,15 +31,38 @@ const Auth = ({navigation}) => {
             <Button
             title  = 'Generate OTP'
             onPress = {()=> {
-                navigation.navigate('OTPScreen');
-            }}
+                if(phno){
+                    signIn(phno)
+                .then((confirmation)=>{
+                    setErr('')
+                    console.log(confirmation.confirm)
+                    navigation.navigate('OTPScreen',{confirmation : confirmation, phno : phno})
+                })
+                .catch(error => {
+                    setErr('Please enter valid phone number')
+                })  
+            }
+            else
+            {
+                setErr('Field can\'t be empty')
+            }
+        }
+                }
+                
             >
             </Button>
+            {err?<Text style = {{color:'red',marginVertical:5}}>{err}</Text>:null}
             </View>
             </View>
 
         </View>
     )
+}
+
+const signIn = async(phno) => {
+    const confirmation = await auth().signInWithPhoneNumber(phno)
+    return confirmation
+    
 }
 
 Auth.navigationOptions = () => ({
