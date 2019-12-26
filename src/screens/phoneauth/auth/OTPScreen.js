@@ -77,7 +77,7 @@ class OTPScreen extends React.Component{
         codeInputFieldStyle={styles.underlineStyleBase}
         onCodeFilled = {(code => {
             this.verifyCode(code).then(response => {
-                if(response.uid)
+                if(response)
                 {
                     this.props.navigation.navigate('HomeScreen',{user : response})
                 }
