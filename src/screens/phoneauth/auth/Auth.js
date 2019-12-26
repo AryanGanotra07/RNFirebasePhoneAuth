@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import {View,Text, TextInput, Button, Alert, Image, Dimensions} from 'react-native';
+import {View,Text, TextInput, Button, Image} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import OTPScreen from './OTPScreen';
 
-const {height, width} = Dimensions.get('window');
+
 const Auth = ({navigation}) => {
     const defaultphn = '+919827352522'
     const [phno, onChangePhno] = useState('');
