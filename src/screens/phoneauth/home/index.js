@@ -6,5 +6,5 @@ export default createStackNavigator({
 },
 {
     initialRouteName : 'HomeScreen',
-    headerMode:'none'
+   
 });
