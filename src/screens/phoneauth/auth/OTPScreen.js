@@ -72,7 +72,7 @@ class OTPScreen extends React.Component{
         <Text style = {{fontWeight:'bold',color:'black', marginVertical:5}}>Enter verification code</Text>
         <OTPInputView
         style={{width: width*0.75, height:50, marginVertical:5,alignSelf:'center'}}
-        pinCount={6}
+        pinCount={10}
         autoFocusOnLoad
         codeInputFieldStyle={styles.underlineStyleBase}
         onCodeFilled = {(code => {
