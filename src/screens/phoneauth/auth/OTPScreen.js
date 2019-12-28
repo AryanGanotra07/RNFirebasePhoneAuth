@@ -5,7 +5,7 @@ import auth from '@react-native-firebase/auth';
 
 const {height, width} = Dimensions.get('window');
 
-const timerTime = 6
+const timerTime = 60
 class OTPScreen extends React.Component{
     constructor(props: Object) {
         super(props);
@@ -22,6 +22,11 @@ class OTPScreen extends React.Component{
       
       componentDidMount(){
           let phno = this.props.navigation.getParam('phno')
+         this.unsubscribe = auth().onAuthStateChanged(user => {
+            if (user) {
+              this.props.navigation.navigate('HomeScreen',{user : user})
+            }
+          });
         // this.signIn(JSON.stringify(phno))
         // .then(confirmation => {this.setState((prevState)=>({confirmation : confirmation}))})
         // .catch(err => {this.setState((prevState)=> ({err : err}))})
@@ -41,6 +46,7 @@ class OTPScreen extends React.Component{
       
       componentWillUnmount(){
        clearInterval(this.interval);
+       this.unsubscribe()
       }
 
     
@@ -53,34 +59,36 @@ class OTPScreen extends React.Component{
       verifyCode = async(code) => {
         let response = null
         try{
-          response = await this.state.confirmation.confirm(code)
+          response = await this.state.confirmation.confirm(code.toString())
         }
         catch (e) {
-            this.setState((prevState)=>({err:e}))
+            this.setState((prevState)=>({err:e.message.toString()}))
         }
         return response;
       }
       
     render(){
-        auth().onAuthStateChanged(user => {
-            if (user) {
-              // Stop the login flow / Navigate to next page
-            }
-          });
+        
         return (
        <View style = {{padding:10,flex:1}}>
         <Text style = {{fontWeight:'bold',color:'black', marginVertical:5}}>Enter verification code</Text>
         <OTPInputView
         style={{width: width*0.75, height:50, marginVertical:5,alignSelf:'center'}}
-        pinCount={10}
+        pinCount={6}
         autoFocusOnLoad
         codeInputFieldStyle={styles.underlineStyleBase}
         onCodeFilled = {(code => {
             this.verifyCode(code).then(response => {
-                if(response)
-                {
-                    this.props.navigation.navigate('HomeScreen',{user : response})
-                }
+              //this.setState((prevState)=>({err:response.toString()}))
+             
+                console.log(response)
+            
+                   // this.props.navigation.navigate('HomeScreen',{user : response})
+                
+                // else
+                // {
+                //   this.setState((prevState)=>({err:"Please try again"}))
+                // }
             })
         })}
         />
@@ -106,7 +114,7 @@ class OTPScreen extends React.Component{
         }
         </View>
         <View style = {{alignSelf:'center'}}>
-        {this.state.err?<Text style = {{color:'red'}}>Wrong code. Try again.</Text>:null}
+        {this.state.err?<Text style = {{color:'red'}}>{this.state.err}</Text>:null}
         <TouchableOpacity
         onPress = {()=>{this.props.navigation.goBack()}}
         style = {{alignSelf:'flex-end'}}

@@ -11,7 +11,7 @@
     "prepare": "patch-package"
   },
   "dependencies": {
-    "@react-native-firebase/app": "6.2.0",
+    "@react-native-firebase/app": "^6.2.0",
     "@react-native-firebase/auth": "^6.2.0",
     "@twotalltotems/react-native-otp-input": "^1.1.2",
     "react": "16.9.0",

@@ -5,6 +5,11 @@ import OTPScreen from './OTPScreen';
 
 
 const Auth = ({navigation}) => {
+    const user = auth().currentUser;
+    if(user)
+    {
+        navigation.navigate('HomeScreen',{user : user})
+    }
     const defaultphn = '+919827352522'
     const [phno, onChangePhno] = useState('');
     const [err, setErr] = useState('')
@@ -39,7 +44,7 @@ const Auth = ({navigation}) => {
                     navigation.navigate('OTPScreen',{confirmation : confirmation, phno : phno})
                 })
                 .catch(error => {
-                    setErr('Please enter valid phone number')
+                    setErr(error.message.toString())
                 })  
             }
             else

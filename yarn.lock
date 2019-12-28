@@ -1024,7 +1024,7 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/app-types/-/app-types-6.2.0.tgz#4d3c0e7fa4e4f00061c52b1a32d76e85e5db9f2c"
   integrity sha512-3UW3cuCgY/JMp+7n6bLeRXKDS/JcXwnHwL0RUIUHg2NhlNAXmIUQbbl0gZbW10YHRnW7D3+JE60Mpm9atTzh9g==
 
-"@react-native-firebase/app@6.2.0":
+"@react-native-firebase/app@^6.2.0":
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-6.2.0.tgz#2d4327399f5e8021d7bad264624f1a29f0741f6c"
   integrity sha512-LlYvml2hhqE28T9rU0SpwcKvlrwp0QyY90HTV0tvEEfGaCahd9xlIj7IFQCXNUNYICFi7Vn2YjxAZNF8KgKpmQ==
@@ -1056,6 +1056,11 @@
     hoist-non-react-statics "^3.0.1"
     react-native-safe-area-view "^0.14.1"
     react-native-screens "^1.0.0 || ^1.0.0-alpha"
+
+"@twotalltotems/react-native-otp-input@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@twotalltotems/react-native-otp-input/-/react-native-otp-input-1.1.2.tgz#63e9b0a58dc1cec2a5f23b840ff6a92bc75c4936"
+  integrity sha512-CAQhSrG0dq7IwQBRXRgW0OJ21Z4bgk15m7+XAa0VBc1siXXbxTSTYZAhrLejwEFiEHhLyS07VJDNV9fQU4835g==
 
 "@types/babel__core@^7.1.0":
   version "7.1.3"
